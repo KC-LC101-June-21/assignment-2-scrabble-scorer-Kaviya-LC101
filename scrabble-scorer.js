@@ -44,13 +44,13 @@ function initialPrompt() {
 };
 
 
-function simpleScoreFunction(word){
+function simpleScore(word){
   let simpleScorePoints=word.length;
   return simpleScorePoints;
 }
 
 
-function vowelScore(word){
+function vowelBonusScore(word){
   let vowelBonusScorePoints=0;
   word=word.toUpperCase();
   vowel=['A','E','I','O','U'];
@@ -65,22 +65,28 @@ function vowelScore(word){
   return vowelBonusScorePoints;
 }
 
-let simpleScore={
+/*let simpleScore={
   name: 'Simple',
   description: 'One point per Character',
-  scoringFunction: simpleScoreFunction
+  scoringFunction: simpleScore
 };
 let vowelBonusScore ={
   name: 'Vowel Bonus',
   description: 'Vowels are worth 3 points',
-  scoringFunction: vowelScore,
+  scoringFunction: vowelBonusScore,
 }
 let scrabbleScore ={
    name: 'Scrabble',
   description: 'Uses Scrabble point system',
-  scoringFunction: newScrabbleScore,
-}
-const scoringAlgorithms = [simpleScore,vowelBonusScore,scrabbleScore];
+  scoringFunction: scrabbleScore,
+}*/
+//const scoringAlgorithms = [simpleScore,vowelBonusScore,scrabbleScore];
+
+const scoringAlgorithms=[
+  {name: 'Simple',description: 'One point per Character',scoringFunction: simpleScore},
+  {name: 'Vowel Bonus',description: 'Vowels are worth 3 points',scoringFunction: vowelBonusScore},
+  {name: 'Scrabble',description: 'Uses Scrabble point system',scoringFunction: scrabbleScore}
+];
 
 function scorerPrompt(word) {
   console.log('Which scoring algorithm would you like to use?')
@@ -92,8 +98,6 @@ function scorerPrompt(word) {
    console.log(`\nalgorithm name: ${scoringAlgorithms[algorithm].name}`)
    console.log(`\nscoringFunction result: ${scoringAlgorithms[algorithm].scoringFunction(word)}`)
 }
-
-
 function transform(object) {
   let newObject={};
   
@@ -108,20 +112,19 @@ return newObject
 };
 
 let newPointStructure = transform(oldPointStructure)
-//console.log(newPointStructure)
 
-function newScrabbleScore(word){
+function scrabbleScore(word){
   word = word.toLowerCase();
   let scrabblePoints=0
   for(i=0;i<word.length;i++){
-   // let key=word[i]
-    //console.log (key)
-    //console.log(newPointStructure[key])
+   
     scrabblePoints +=Number(newPointStructure[word[i]])
   
   }
   return scrabblePoints
 }
+
+
 //console.log(newScrabbleScore('kaviya'))
 function runProgram() {
    let scoreword=initialPrompt();

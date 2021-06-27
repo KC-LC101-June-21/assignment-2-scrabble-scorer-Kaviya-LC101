@@ -104,14 +104,16 @@ function transform(object) {
   for(items in object ){
     let letter=object[items]
     for(i=0;i<letter.length;i++){
-     newObject[letter[i].toLowerCase()]=items
-    }
+     newObject[letter[i].toLowerCase()]=Number(items)
+     }
     
   }
 return newObject
 };
 
+
 let newPointStructure = transform(oldPointStructure)
+//console.log(newPointStructure)
 
 function scrabbleScore(word){
   word = word.toLowerCase();

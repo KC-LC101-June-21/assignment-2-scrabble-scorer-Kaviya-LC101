@@ -38,6 +38,9 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble!\n");
    let userWord= input.question('Enter a Word to score: ')
+   while(!/^[A-Za-z ]+$/.test(userWord)){
+    userWord= input.question('\nInvalid input \nEnter a Word to score: ')
+   }
    return userWord
   // console.log(oldScrabbleScorer(userWord));
    
@@ -65,23 +68,6 @@ function vowelBonusScore(word){
   return vowelBonusScorePoints;
 }
 
-/*let simpleScore={
-  name: 'Simple',
-  description: 'One point per Character',
-  scoringFunction: simpleScore
-};
-let vowelBonusScore ={
-  name: 'Vowel Bonus',
-  description: 'Vowels are worth 3 points',
-  scoringFunction: vowelBonusScore,
-}
-let scrabbleScore ={
-   name: 'Scrabble',
-  description: 'Uses Scrabble point system',
-  scoringFunction: scrabbleScore,
-}*/
-//const scoringAlgorithms = [simpleScore,vowelBonusScore,scrabbleScore];
-
 const scoringAlgorithms=[
   {name: 'Simple',description: 'One point per Character',scoringFunction: simpleScore},
   {name: 'Vowel Bonus',description: 'Vowels are worth 3 points',scoringFunction: vowelBonusScore},
@@ -94,7 +80,11 @@ function scorerPrompt(word) {
     console.log(`\n${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
   }
   
-   let algorithm= input.question('\nEnter 0, 1, 2: ');
+   let algorithm= Number(input.question('\nEnter 0, 1, 2: '));
+  
+   while ((algorithm !==0) && (algorithm !==1) && (algorithm!==2))  {
+    algorithm= Number(input.question('\nInvalid input \nEnter 0, 1, 2: '))
+   }
    console.log(`\nalgorithm name: ${scoringAlgorithms[algorithm].name}`)
    console.log(`\nscoringFunction result: ${scoringAlgorithms[algorithm].scoringFunction(word)}`)
 }

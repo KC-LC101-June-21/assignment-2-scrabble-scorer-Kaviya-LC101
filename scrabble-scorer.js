@@ -96,7 +96,7 @@ function transform(object) {
     for(i=0;i<letter.length;i++){
      newObject[letter[i].toLowerCase()]=Number(items)
      }
-    
+    newObject[' ']=0
   }
 return newObject
 };

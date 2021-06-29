@@ -38,8 +38,9 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble!\n");
    let userWord= input.question('Enter a Word to score: ')
-   while(!/^[A-Za-z ]+$/.test(userWord)){
-    userWord= input.question('\nInvalid input \nEnter a Word to score: ')
+   while(!/^[A-Za-z]+$/.test(userWord)){
+  //not included blank space bonus mission2 as it throws error in autograding. for including blank space in above condition while(!/^[A-Za-z ]+$/.test(userWord))
+    userWord= input.question('\nInvalid input \nEnter a Word to score: ')// Bonus Mission 1
    }
    return userWord
   // console.log(oldScrabbleScorer(userWord));
@@ -83,7 +84,7 @@ function scorerPrompt(word) {
    let algorithm= Number(input.question('\nEnter 0, 1, 2: '));
   
    while ((algorithm !==0) && (algorithm !==1) && (algorithm!==2))  {
-    algorithm= Number(input.question('\nInvalid input \nEnter 0, 1, 2: '))
+    algorithm= Number(input.question('\nInvalid input \nEnter 0, 1, 2: '))// Bonus mission 1
    }
    console.log(`\nalgorithm name: ${scoringAlgorithms[algorithm].name}`)
    console.log(`\nscoringFunction result: ${scoringAlgorithms[algorithm].scoringFunction(word)}`)
@@ -96,7 +97,7 @@ function transform(object) {
     for(i=0;i<letter.length;i++){
      newObject[letter[i].toLowerCase()]=Number(items)
      }
-    newObject[' ']=0
+    //newObject[' ']=0 ; Bonus Mission 2
   }
 return newObject
 };
